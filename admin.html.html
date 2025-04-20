@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <style>
+        /* आपकी मौजूदा CSS स्टाइल्स */
+        .admin-box {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input { width: 100%; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="admin-box">
+        <h2>Admin Login 🔒</h2>
+        <input type="email" id="email" placeholder="ईमेल">
+        <input type="password" id="password" placeholder="पासवर्ड">
+        <button onclick="login()">लॉग इन</button>
+        <p id="error" style="color:red;"></p>
+    </div>
+
+    <script>
+        // Firebase कॉन्फ़िगरेशन (अपना कोड यहाँ डालें)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Firebase इनिशियलाइज़ करें
+        firebase.initializeApp(firebaseConfig);
+
+        // लॉगिन फ़ंक्शन
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    window.location.href = "dashboard.html"; // सफल लॉगिन
+                })
+                .catch((error) => {
+                    document.getElementById("error").innerText = "गलत ईमेल या पासवर्ड!";
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<script>
+    // यूज़र चेक करें
+    firebase.auth().onAuthStateChanged((user) => {
+        if (!user || user.email !== "mohitrajpura9@gmail.com") { 
+            window.location.href = "admin.html"; // अनधिकृत यूज़र को ब्लॉक
+        }
+    });
+
+    // लॉगआउट फ़ंक्शन
+    function logout() {
+        firebase.auth().signOut().then(() => {
+            window.location.href = "admin.html";
+        });
+    }
+</script>
+
+<!-- डैशबोर्ड कंटेंट यहाँ रहेगा -->
+<button onclick="logout()">लॉग आउट</button>
